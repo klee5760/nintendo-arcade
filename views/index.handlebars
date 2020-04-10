@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="text-center">
+      Welcome CONA(Classic Online Nintendo Arcade)!
+    </h1>
+    <h2 class="text-center">
+      Where you can play Nintendo games from NES to N64!
+    </h2>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          Favorite Game List
+        </div>
+        <div class="card-body">
+          <table class="table table-hover" id="game-table">
+            <thead>
+              <tr>
+                <th>Game Name</th>
+                <th>Platform</th>
+                <th>Link</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each games}}
+              <tr>
+                <td>{{game_name}}</td>
+                <td>{{platform}}</td>
+                <td>
+                  <a href="{{link}}" target = "_blank">
+                    Play Here!</a>
+                </td>
+                <td>
+                  <button data-id = "{{id}}" type="submit" class="btn btn-primary delete-game-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              Add Your Favorite Game
+            </div>
+            <div class="card-body">
+              <!-- Entry Form -->
+              <form>
+                <div class="form-group">
+                  <label for="game-name-input">Game Name</label>
+                  <input type="text" class="form-control" id="game-name-input" />
+                </div>
+                <div class="form-group">
+                  <label for="destination-input">Platform</label>
+                  <input type="text" class="form-control" id="platform-input" />
+                </div>
+                <div class="form-group">
+                  <label for="link-input">Link</label>
+                  <input type="text" class="form-control" id="link-input" />
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="add-game-btn">
+                  Add Game
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS nintendo;
+USE nintendo;
+
+DROP TABLE IF EXISTS nintendo;
+CREATE TABLE nintendo(
+    id INT NOT NULL AUTO_INCREMENT,
+    game_name VARCHAR(50) NOT NULL,
+    platform VARCHAR(50) NOT NULL,
+    link VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
