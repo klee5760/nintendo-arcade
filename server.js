@@ -15,11 +15,15 @@ var routes = require("./controllers/games_controller.js");
 app.use(routes);
 
 var PORT = process.env.PORT || 8000;
-app.listen(PORT, function() {
-  console.log("Server listening on: http://localhost:" + PORT);
+var db = require("./models");
+
+db.sequelize.sync().then(function () {
+  app.listen(PORT, function () {
+    console.log("Server listening on: http://localhost:" + PORT);
+  });
 });
 
 //DB connection
-require("./src/database/connection");
+// require("./src/database/connection");
 
-require("./src/bootstrap")();
+// require("./src/bootstrap")();

@@ -1,41 +1,30 @@
 var express = require("express");
 var router = express.Router();
-const connection = require("../config/connection");
+const DB = require("../models");
 
 router.get("/", function (req, res) {
-  connection.query("SELECT * FROM nintendo", function (err, result) {
-    if (err) throw err;
-    console.log(result);
+  DB.Nintendo.findAll().then(function (result) {
+    console.log(result.map((x) => x.dataValues));
     res.render("index", {
-      games: result,
+      games: result.map((x) => x.dataValues),
     });
   });
 });
 
 router.post("/api/games", function (req, res) {
-  console.log(req.body)
-  connection.query(
-    "INSERT INTO nintendo (game_name, platform, link) VALUES (?,?,?);",
-    [req.body.name, req.body.platform, req.body.link], 
-  function (err, result) {
-    if (err) throw err;
-    console.log(result);
-   
-    res.send("Okay")
+  console.log(req.body);
+  DB.Nintendo.create(req.body).then(function (newGame) {
+    console.log(newGame);
+    res.sendStatus(200);
   });
 });
 
 router.delete("/api/games/:id", function (req, res) {
-  const id = req.params.id
-  console.log(req.body)
-  connection.query(
-    "DELETE FROM nintendo WHERE id=?",
-    [id], 
-  function (err, result) {
-    if (err) throw err;
-    console.log(result);
-   
-    res.send("Okay")
+  DB.Nintendo.destroy({ where: { id: req.params.id } }).then(function (
+    deleteGame
+  ) {
+    console.log(deleteGame);
+    res.sendStatus(200);
   });
 });
 
